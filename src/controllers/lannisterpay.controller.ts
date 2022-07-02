@@ -5,6 +5,7 @@ import {LannisterPayload, SplitInfo} from "../types/lannisterPayTypes";
 
     export const paymentComputation = async (req: Request, res: Response) => {
         const {ID, SplitInfo, Amount} = req.body as LannisterPayload
+        //this block of code orders the splitInfo Array by he SplitType precedence
         const sortedSplitInfoArray = SplitInfo.map((items) => {
             if (items.SplitType === 'FLAT') {
                 return {...items, weight: 1}
@@ -16,7 +17,7 @@ import {LannisterPayload, SplitInfo} from "../types/lannisterPayTypes";
         }).sort((a, b) => {
             return a.weight < b.weight ? -1 : 1
         })
-        const computedValue = await compute({ID, initialAmount: Amount, splitInfoArray: sortedSplitInfoArray})
+        const computedValue = await compute({ ID, initialAmount: Amount, splitInfoArray: sortedSplitInfoArray})
         res.status(200).json(computedValue)
     }
 
