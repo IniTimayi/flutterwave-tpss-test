@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import {LannisterPayload, SplitInfo} from "lannisterPayTypes";
+import {LannisterPayload, SplitInfo} from "../types/lannisterPayTypes";
 
 export const paymentComputation = async (req: Request, res: Response) => {
     const {ID, SplitInfo, Amount} = req.body as LannisterPayload
