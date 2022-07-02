@@ -16,13 +16,7 @@ import {LannisterPayload, SplitInfo} from "../types/lannisterPayTypes";
         }).sort((a, b) => {
             return a.weight < b.weight ? -1 : 1
         })
-
-        const modifiedArray = sortedSplitInfoArray.map((item) => {
-            const {weight, ...other} = item
-            return other
-        })
-
-        const computedValue = await compute({ID, initialAmount: Amount, splitInfoArray: modifiedArray})
+        const computedValue = await compute({ID, initialAmount: Amount, splitInfoArray: sortedSplitInfoArray})
         res.status(200).json(computedValue)
     }
 
